@@ -1,11 +1,13 @@
 import boto3
 
-dynamodb = boto3.resource("dynamodb")
+
+def get_item():
+
+    dynamodb = boto3.resource("dynamodb")
+    table = dynamodb.Table("hosts")
+    response = table.get_item(Key={"name": "@root", "ip": "192.168.65.6"})
+    item = response["Item"]
+    print(item)
 
 
-table = dynamodb.Table("hosts")
-
-response = table.get_item(Key={"name": "@root", "ip": "192.168.65.6"})
-
-item = response["Item"]
-print(item)
+get_item()
